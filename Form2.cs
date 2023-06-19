@@ -1,10 +1,10 @@
-﻿using System;
+using System;
 using System.Data.SqlClient;
 using System.Globalization;
 using System.Windows.Forms;
 
 namespace YazilimYapimi3
-{
+{    // Veritabanına bağlantı
     public partial class Form2 : Form
     {
         private SqlConnection connection;
@@ -24,7 +24,7 @@ namespace YazilimYapimi3
             connection = new SqlConnection(connectionString);
             connection.Open();
 
-            
+            // Tarih tablosunun olup olmadığını kontrol et
             string checkTableQuery = "IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'Olaylar') BEGIN CREATE TABLE Olaylar (Zaman DATE, YapilanIş NVARCHAR(100)) END;";
             SqlCommand checkTableCommand = new SqlCommand(checkTableQuery, connection);
             checkTableCommand.ExecuteNonQuery();
@@ -34,7 +34,7 @@ namespace YazilimYapimi3
         {
             connection.Close();
         }
-
+        // Veriyi Tarih tablosuna ekle
         private void button2_Click(object sender, EventArgs e)
         {
             DateTime zaman = dateTimePicker1.Value;
@@ -51,7 +51,7 @@ namespace YazilimYapimi3
         }
 
 
-
+        //Kayıtedilen verileri göster
         private void button1_Click(object sender, EventArgs e)
         {
             
@@ -84,7 +84,7 @@ namespace YazilimYapimi3
         {
             
         }
-
+        // Form3'ü açma
         private void button3_Click(object sender, EventArgs e)
         {
             
@@ -96,7 +96,7 @@ namespace YazilimYapimi3
         {
 
         }
-
+        //Uygulumadan çıkış
         private void button4_Click(object sender, EventArgs e)
         {
             
