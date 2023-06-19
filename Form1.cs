@@ -6,24 +6,26 @@ namespace YazilimYapimi3
 
     public partial class Form1 : Form
     {
-        private string userType = "Üye";
+        private string userType = "Ãœye";
 
 
         public Form1()
         {
             InitializeComponent();
         }
-
+        //KullanÄ±cÄ±dan kayÄ±t olmak iÃ§in alÄ±nan bilgiler
         private void button1_Click(object sender, EventArgs e)
         {
             string Ad = textBox1.Text;
             string Soyad = textBox2.Text;
-            string KullanýcýAdý = textBox3.Text;
+            string KullanÄ±cÄ±AdÄ± = textBox3.Text;
             string Password = textBox4.Text;
             string TCKimlikNo = textBox5.Text;
             string TelefonNo = textBox6.Text;
             string Adres = textBox7.Text;
-
+            
+            // VeritabanÄ±na baÄŸlantÄ± 
+           
             string connectionString = "Data Source=HP-OMEN;Initial Catalog=OgrenciBilgileriVT;Integrated Security=True;User ID=azad;Password=123";
 
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -31,11 +33,11 @@ namespace YazilimYapimi3
                 try
                 {
                     connection.Open();
-                    Console.WriteLine("Veritabanýna baðlandý!");
+                    Console.WriteLine("VeritabanÄ±na baÄŸlandÄ±!");
 
                     if (checkBox1.Checked)
                     {
-                        userType = "Üye";
+                        userType = "Ãœye";
                     }
                     else if (checkBox2.Checked)
                     {
@@ -43,15 +45,15 @@ namespace YazilimYapimi3
                     }
                     else
                     {
-                        MessageBox.Show("Lütfen kullanýcý tipini seçin.", "Uyarý", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBox.Show("LÃ¼tfen kullanÄ±cÄ± tipini seÃ§in.", "UyarÄ±", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return;
                     }
 
-                    string query = "INSERT INTO Bilgi (Ad, Soyad, KullanýcýAdý, Password, TCKimlikNo, TelefonNo, Adres, KullanýcýType) VALUES (@ad, @soyad, @kullaniciAdi, @password, @tcKimlikNo, @telefonNo, @adres, @kullaniciType)";
+                    string query = "INSERT INTO Bilgi (Ad, Soyad, KullanÄ±cÄ±AdÄ±, Password, TCKimlikNo, TelefonNo, Adres, KullanÄ±cÄ±Type) VALUES (@ad, @soyad, @kullaniciAdi, @password, @tcKimlikNo, @telefonNo, @adres, @kullaniciType)";
                     SqlCommand command = new SqlCommand(query, connection);
                     command.Parameters.AddWithValue("@ad", Ad);
                     command.Parameters.AddWithValue("@soyad", Soyad);
-                    command.Parameters.AddWithValue("@kullaniciAdi", KullanýcýAdý);
+                    command.Parameters.AddWithValue("@kullaniciAdi", KullanÄ±cÄ±AdÄ±);
                     command.Parameters.AddWithValue("@password", Password);
                     command.Parameters.AddWithValue("@tcKimlikNo", TCKimlikNo);
                     command.Parameters.AddWithValue("@telefonNo", TelefonNo);
@@ -62,28 +64,29 @@ namespace YazilimYapimi3
 
                     if (rowsAffected > 0)
                     {
-                        Console.WriteLine("Kullanýcý kaydý baþarýyla oluþturuldu");
-                        MessageBox.Show("Kullanýcý kaydý baþarýyla oluþturuldu", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        Console.WriteLine("KullanÄ±cÄ± kaydÄ± baÅŸarÄ±yla oluÅŸturuldu");
+                        MessageBox.Show("KullanÄ±cÄ± kaydÄ± baÅŸarÄ±yla oluÅŸturuldu", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     else
                     {
-                        Console.WriteLine("Kullanýcý kaydý oluþturulamadý.");
-                        MessageBox.Show("Kullanýcý kaydý oluþturulamadý.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        Console.WriteLine("KullanÄ±cÄ± kaydÄ± oluÅŸturulamadÄ±.");
+                        MessageBox.Show("KullanÄ±cÄ± kaydÄ± oluÅŸturulamadÄ±.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("Baðlantý hatasý: " + ex.Message);
-                    MessageBox.Show("Baðlantý hatasý: " + ex.Message, "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Console.WriteLine("BaÄŸlantÄ± hatasÄ±: " + ex.Message);
+                    MessageBox.Show("BaÄŸlantÄ± hatasÄ±: " + ex.Message, "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
-
+        //VeritabanÄ±ndan giriÅŸ kontrolÃ¼
         private void button2_Click(object sender, EventArgs e)
         {
             string kullaniciAdi = textBox8.Text.ToLower();
             string sifre = textBox9.Text;
 
+            // VeritabanÄ±na baÄŸlantÄ± 
             string connectionString = "Data Source=HP-OMEN;Initial Catalog=OgrenciBilgileriVT;Integrated Security=True;User ID=azad;Password=123";
 
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -91,9 +94,9 @@ namespace YazilimYapimi3
                 try
                 {
                     connection.Open();
-                    Console.WriteLine("Veritabanýna baðlandý!");
+                    Console.WriteLine("VeritabanÄ±na baÄŸlandÄ±!");
 
-                    string query = "SELECT COUNT(*) FROM Bilgi WHERE LOWER(KullanýcýAdý) = @kullaniciAdi AND LOWER(PASSWORD) = LOWER(@sifre)";
+                    string query = "SELECT COUNT(*) FROM Bilgi WHERE LOWER(KullanÄ±cÄ±AdÄ±) = @kullaniciAdi AND LOWER(PASSWORD) = LOWER(@sifre)";
                     SqlCommand command = new SqlCommand(query, connection);
                     command.Parameters.AddWithValue("@kullaniciAdi", kullaniciAdi);
                     command.Parameters.AddWithValue("@sifre", sifre);
@@ -102,8 +105,8 @@ namespace YazilimYapimi3
 
                     if (kullaniciSayisi > 0)
                     {
-                        Console.WriteLine("Giriþ baþarýlý. Sisteme hoþ geldiniz.");
-                        MessageBox.Show("Giriþ baþarýlý. Sisteme hoþ geldiniz.", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        Console.WriteLine("GiriÅŸ baÅŸarÄ±lÄ±. Sisteme hoÅŸ geldiniz.");
+                        MessageBox.Show("GiriÅŸ baÅŸarÄ±lÄ±. Sisteme hoÅŸ geldiniz.", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                         Form2 form2 = new Form2();
                         this.Hide();
@@ -111,14 +114,14 @@ namespace YazilimYapimi3
                     }
                     else
                     {
-                        Console.WriteLine("Kullanýcý adý veya þifre hatalý. Giriþ baþarýsýz!");
-                        MessageBox.Show("Kullanýcý adý veya þifre hatalý. Giriþ baþarýsýz!", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        Console.WriteLine("KullanÄ±cÄ± adÄ± veya ÅŸifre hatalÄ±. GiriÅŸ baÅŸarÄ±sÄ±z!");
+                        MessageBox.Show("KullanÄ±cÄ± adÄ± veya ÅŸifre hatalÄ±. GiriÅŸ baÅŸarÄ±sÄ±z!", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("Baðlantý hatasý: " + ex.Message);
-                    MessageBox.Show("Baðlantý hatasý: " + ex.Message, "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Console.WriteLine("BaÄŸlantÄ± hatasÄ±: " + ex.Message);
+                    MessageBox.Show("BaÄŸlantÄ± hatasÄ±: " + ex.Message, "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -128,52 +131,52 @@ namespace YazilimYapimi3
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            // Existing code...
+            
         }
 
         private void textBox8_TextChanged(object sender, EventArgs e)
         {
-            // Existing code...
+            
         }
 
         private void textBox9_TextChanged(object sender, EventArgs e)
         {
-            // Existing code...
+            
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
-            // Existing code...
+            
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            // Existing code...
+            
         }
 
         private void label10_Click(object sender, EventArgs e)
         {
-            // Existing code...
+            
         }
 
         private void toolTip2_Popup(object sender, PopupEventArgs e)
         {
-            // Existing code...
+            
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
-            // Existing code...
+            
         }
 
         private void checkBox2_CheckedChanged(object sender, EventArgs e)
         {
-            // Existing code...
+            
         }
-
+        //Uygulumadan Ã§Ä±kÄ±ÅŸ
         private void button3_Click(object sender, EventArgs e)
         {
-            // Close the application
+            
             Application.Exit();
         }
 
