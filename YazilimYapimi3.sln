@@ -1,0 +1,27 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33723.286
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YazilimYapimi3", "YazilimYapimi3.csproj", "{65AEC7E7-6D80-45E9-A71B-333E02B91C0A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Çözüm Öğeleri", "Çözüm Öğeleri", "{8D3FB609-1455-460E-9C56-BC16AFB23FC8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{65AEC7E7-6D80-45E9-A71B-333E02B91C0A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65AEC7E7-6D80-45E9-A71B-333E02B91C0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65AEC7E7-6D80-45E9-A71B-333E02B91C0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65AEC7E7-6D80-45E9-A71B-333E02B91C0A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9702AC66-6EBC-45F1-B3EE-701BAE0A5CE3}
+	EndGlobalSection
+EndGlobal
