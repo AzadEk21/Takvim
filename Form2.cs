@@ -24,7 +24,7 @@ namespace YazilimYapimi3
             connection = new SqlConnection(connectionString);
             connection.Open();
 
-            // Tarih tablosunun olup olmadığını kontrol et
+            
             string checkTableQuery = "IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'Olaylar') BEGIN CREATE TABLE Olaylar (Zaman DATE, YapilanIş NVARCHAR(100)) END;";
             SqlCommand checkTableCommand = new SqlCommand(checkTableQuery, connection);
             checkTableCommand.ExecuteNonQuery();
@@ -40,7 +40,7 @@ namespace YazilimYapimi3
             DateTime zaman = dateTimePicker1.Value;
             string yapilacakIs = textBox2.Text;
 
-            // Veriyi Tarih tablosuna ekle
+            
             string insertQuery = "INSERT INTO Olaylar (Zaman, YapilanIş) VALUES (@Zaman, @YapilacakIs);";
             SqlCommand insertCommand = new SqlCommand(insertQuery, connection);
             insertCommand.Parameters.AddWithValue("@Zaman", zaman);
@@ -54,7 +54,7 @@ namespace YazilimYapimi3
 
         private void button1_Click(object sender, EventArgs e)
         {
-            // Verileri DataGridView kontrolünde göster
+            
             string selectQuery = "SELECT * FROM Olaylar;";
             SqlCommand selectCommand = new SqlCommand(selectQuery, connection);
             SqlDataReader reader = selectCommand.ExecuteReader();
