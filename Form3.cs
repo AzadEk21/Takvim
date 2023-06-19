@@ -1,4 +1,4 @@
-﻿namespace YazilimYapimi3
+namespace YazilimYapimi3
 {
     using System;
     using System.Collections.Generic;
@@ -10,13 +10,13 @@
     using System.Text;
     using System.Threading.Tasks;
     using System.Windows.Forms;
-
+    // Veritabanına bağlantı
     public partial class Form3 : Form
     {
         private SqlConnection connection;
         private string connectionString = "Data Source=HP-OMEN;Initial Catalog=OgrenciBilgileriVT;Integrated Security=True;User ID=azad;Password=123";
         private DateTime? selectedDate;
-        private string selectedEvent = string.Empty; // Initialize it here
+        private string selectedEvent = string.Empty; 
 
         public Form3()
         {
@@ -32,24 +32,24 @@
 
         private void label1_Click(object sender, EventArgs e)
         {
-            // label1 tıklandığında yapılacak işlemler
+            
         }
 
         private void label3_Click(object sender, EventArgs e)
         {
-            // label3 tıklandığında yapılacak işlemler
+            
         }
 
         private void label2_Click(object sender, EventArgs e)
         {
-            // label2 tıklandığında yapılacak işlemler
+            
         }
-
+        // Veritabanından olayları alıp takvimde göster
         private void monthCalendar1_DateChanged(object sender, DateRangeEventArgs e)
         {
             selectedDate = monthCalendar1.SelectionStart.Date;
 
-            // Veritabanından olayları al
+            
             string selectQuery = "SELECT YapilanIş FROM Olaylar WHERE Zaman = @Zaman";
             SqlCommand selectCommand = new SqlCommand(selectQuery, connection);
             selectCommand.Parameters.AddWithValue("@Zaman", selectedDate);
@@ -81,12 +81,12 @@
         {
             public DateTime SelectedDate { get; private set; }
         }
-
+        // Veritabanından seçili tarihte kaydedilmiş olayı sil
         private void button1_Click(object sender, EventArgs e)
         {
             DateTime selectedDate = monthCalendar1.SelectionStart.Date;
 
-            // Veritabanından seçili tarihte kaydedilmiş olayı sil
+            
             string deleteQuery = "DELETE FROM Olaylar WHERE Zaman = @Zaman";
             SqlCommand deleteCommand = new SqlCommand(deleteQuery, connection);
             deleteCommand.Parameters.AddWithValue("@Zaman", selectedDate);
@@ -103,7 +103,7 @@
                 return;
             }
 
-            // Form4'ü açarak tarih seçimini yapın
+            // Form4'ü açarak tarih seçimini yapar
             using (var form4 = new Form4())
             {
                 if (form4.ShowDialog() == DialogResult.OK)
@@ -132,7 +132,7 @@
                 }
             }
         }
-
+         //Hatırlatıcı oluşturma
         private void button3_Click(object sender, EventArgs e)
         {
             if (selectedDate == null)
@@ -154,10 +154,10 @@
                 return;
             }
 
-            selectedEvent = currentSelectedEvent; // Update the selected event
+            selectedEvent = currentSelectedEvent; 
 
             System.Windows.Forms.Timer hatirlaticiTimer = new System.Windows.Forms.Timer();
-            hatirlaticiTimer.Interval = 1000; // Her saniye tetiklenir
+            hatirlaticiTimer.Interval = 1000; 
             hatirlaticiTimer.Tick += (hatirlaticiSender, hatirlaticiEventArgs) =>
             {
                 TimeSpan remainingTime = selectedDate.Value - DateTime.Now;
@@ -166,17 +166,17 @@
                 {
                     hatirlaticiTimer.Stop();
                     MessageBox.Show("Hatırlatıcı alarmı: " + selectedEvent);
-                    System.Media.SystemSounds.Exclamation.Play(); // uyarı sesi çalar
+                    System.Media.SystemSounds.Exclamation.Play(); 
                 }
                 else
-                {
+                {   //Kalan zamanı hesaplar
                     int years = remainingTime.Days / 365;
                     int months = (remainingTime.Days % 365) / 30;
                     int days = (remainingTime.Days % 365) % 30;
                     int hours = remainingTime.Hours;
                     int minutes = remainingTime.Minutes;
                     int seconds = remainingTime.Seconds;
-
+                    //Kalan zamanı ekrana yazdırır
                     string countdownMessage = string.Format("{0} adlı olaya {1} yıl, {2} ay, {3} gün, {4} saat, {5} dakika, {6} saniye kaldı",
                         selectedEvent, years, months, days, hours, minutes, seconds);
 
@@ -193,17 +193,17 @@
 
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
         {
-            selectedEvent = string.Empty; // Clear the selected event when the date picker value changes
+            selectedEvent = string.Empty; 
         }
 
         private void Form3_Load(object sender, EventArgs e)
         {
 
         }
-
+        //Uygulumadan çıkış
         private void button4_Click(object sender, EventArgs e)
         {
-            // Close the application
+            
             Application.Exit();
         }
 
