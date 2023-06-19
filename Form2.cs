@@ -77,17 +77,17 @@ namespace YazilimYapimi3
 
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
-            // textBox2 değiştiğinde yapılacak işlemler
+            
         }
 
         private void label1_Click(object sender, EventArgs e)
         {
-            // label1 tıklandığında yapılacak işlemler
+            
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            // Form3'ü aç
+            
             Form3 form3 = new Form3();
             form3.Show();
         }
